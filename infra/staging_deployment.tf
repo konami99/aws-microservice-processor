@@ -50,7 +50,7 @@ data "aws_iam_policy_document" "sqs-queue-policy" {
     ]
 
     resources = [
-      aws_sqs_queue.s3_event_process_queue.arn
+      "arn:aws:sqs:us-west-2:476985000721:s3-event-process-queue"
     ]
 
     condition {
