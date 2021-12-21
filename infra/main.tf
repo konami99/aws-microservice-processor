@@ -8,7 +8,6 @@ locals {
 
 terraform {
   backend "s3" {
-    bucket = "aws-microservice-processor"
     key    = "state"
     region = "us-west-2"
   }
