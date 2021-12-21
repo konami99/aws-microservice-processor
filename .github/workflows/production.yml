@@ -46,7 +46,7 @@ jobs:
           cd infra
           terraform workspace list
           terraform workspace select production || terraform workspace new production
-          terraform plan -var "env=$ENV"
+          terraform plan -var "env=$ENV" -var "sqs_arn=$SQS_ARN"
 
       - name: Terraform Apply
         run: |
@@ -54,5 +54,5 @@ jobs:
           cd infra
           terraform workspace list
           terraform workspace select production || terraform workspace new production
-          terraform apply -auto-approve -var "env=$ENV"
+          terraform apply -auto-approve -var "env=$ENV" -var "sqs_arn=$SQS_ARN"
 
