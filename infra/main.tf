@@ -62,3 +62,32 @@ data "aws_iam_policy_document" "sqs-queue-policy" {
     }
   }
 }
+
+resource "aws_dynamodb_table" "weather_forecast" {
+  name           = "weather_forecast"
+  billing_mode   = "PAY_PER_REQUEST"
+  hash_key       = "timestamp"
+  range_key      = "location"
+
+  attribute {
+    name = "timestamp"
+    type = "N"
+  }
+
+  attribute {
+    name = "location"
+    type = "S"
+  }
+
+  attribute {
+    name = "forecast"
+    type = "S"
+  }
+
+  ttl {
+    attribute_name = "time_to_exist"
+    enabled        = false
+  }
+
+  tags = local.common_tags
+}
