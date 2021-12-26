@@ -79,11 +79,6 @@ resource "aws_dynamodb_table" "weather_forecast" {
     type = "S"
   }
 
-  attribute {
-    name = "forecast"
-    type = "S"
-  }
-
   ttl {
     attribute_name = "time_to_exist"
     enabled        = false
