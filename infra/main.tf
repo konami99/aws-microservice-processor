@@ -64,10 +64,12 @@ data "aws_iam_policy_document" "sqs-queue-policy" {
 }
 
 resource "aws_dynamodb_table" "weather_forecast" {
-  name           = "weather_forecast"
-  billing_mode   = "PAY_PER_REQUEST"
-  hash_key       = "timestamp"
-  range_key      = "location"
+  name             = "weather_forecast"
+  billing_mode     = "PAY_PER_REQUEST"
+  hash_key         = "timestamp"
+  range_key        = "location"
+  stream_enabled   = true
+  stream_view_type = "NEW_AND_OLD_IMAGES"
 
   attribute {
     name = "timestamp"
