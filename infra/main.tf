@@ -83,7 +83,7 @@ resource "aws_dynamodb_table" "weather_forecast" {
 
   ttl {
     attribute_name = "time_to_exist"
-    enabled        = false
+    enabled        = true
   }
 
   tags = local.common_tags
