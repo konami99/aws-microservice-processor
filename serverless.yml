@@ -4,7 +4,7 @@ provider:
   lambdaHashingVersion: 20201221
   name: aws
   memorySize: 512
-  timeout: 900
+  timeout: 20
   region: us-west-2
   runtime: nodejs14.x
 
