@@ -57,17 +57,18 @@ jobs:
           terraform apply -auto-approve -var "env=$ENV" -var "sqs_arn=$SQS_ARN"
 
       - name: Serverless Deploy
-        run: |
-          npm install
-          export $(grep -v '^#' .env.staging | xargs -0)
-          npm run deploy
-        uses: aws-actions/configure-aws-credentials@v1
+      - uses: actions/checkout@v2
+      - uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-west-2
+          aws-region: us-east-2
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME_STAGING }}
           role-duration-seconds: 1200
-          role-session-name: StagingDeploymentSession
+          role-skip-session-tagging: true
+      - run: |
+          npm install
+          export $(grep -v '^#' .env.staging | xargs -0)
+          npm run deploy
         env:
           AWS_ASSUME_ROLE_ARN: ${{ secrets.AWS_ROLE_TO_ASSUME_STAGING }}
