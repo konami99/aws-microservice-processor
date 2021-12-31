@@ -7,7 +7,6 @@ provider:
   timeout: 900
   region: us-west-2
   runtime: nodejs14.x
-  profile: default
 
 plugins:
   - serverless-plugin-typescript
