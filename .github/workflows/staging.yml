@@ -56,3 +56,10 @@ jobs:
           terraform workspace select staging || terraform workspace new staging
           terraform apply -auto-approve -var "env=$ENV" -var "sqs_arn=$SQS_ARN"
 
+      - name: Serverless Deploy
+        run: |
+          npm install
+          export $(grep -v '^#' .env.staging | xargs -0)
+          npm run deploy
+        env:
+          AWS_ASSUME_ROLE_ARN: arn:aws:sts::476985000721:assumed-role/GitHubDeploymentStaging/githubDeployNew
