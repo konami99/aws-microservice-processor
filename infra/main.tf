@@ -63,22 +63,33 @@ data "aws_iam_policy_document" "sqs-queue-policy" {
   }
 }
 
-resource "aws_dynamodb_table" "weather_forecast" {
-  name             = "weather_forecast"
+resource "aws_dynamodb_table" "images" {
+  name             = "images"
   billing_mode     = "PAY_PER_REQUEST"
   hash_key         = "timestamp"
-  range_key        = "location"
+  range_key        = "format"
   stream_enabled   = true
   stream_view_type = "NEW_AND_OLD_IMAGES"
 
   attribute {
     name = "timestamp"
-    type = "N"
+    type = "S"
   }
 
   attribute {
-    name = "location"
+    name = "format"
     type = "S"
+  }
+
+  attribute {
+    name = "filename"
+    type = "S"
+  }
+
+  local_secondary_index {
+    name               = "filename_index"
+    range_key          = "filename"
+    projection_type    = "ALL"
   }
 
   tags = local.common_tags
