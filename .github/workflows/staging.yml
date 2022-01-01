@@ -12,7 +12,7 @@ jobs:
           aws-region: us-west-2
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME_STAGING }}
           role-duration-seconds: 1200
-          role-skip-session-tagging: true
+          role-session-name: StagingDeploymentSession
 
       - name: Checkout
         uses: actions/checkout@v2
