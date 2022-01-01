@@ -94,3 +94,11 @@ resource "aws_dynamodb_table" "images" {
 
   tags = local.common_tags
 }
+
+resource "aws_ssm_parameter" "sns-arn" {
+  name  = "dynamodb_stream_arn"
+  type  = "SecureString"
+  value = aws_dynamodb_table.images.stream_arn
+
+  tags = local.common_tags
+}
