@@ -71,4 +71,4 @@ jobs:
         env:
           ENV: production
           AWS_ASSUME_ROLE_ARN: ${{ secrets.AWS_ROLE_TO_ASSUME_PRODUCTION }}
-          SQS_ARN: ${{ env.SQS_ARN }}
+          SQS_ARN: arn:aws:sqs:us-west-2:476985000721:s3-event-process-queue
