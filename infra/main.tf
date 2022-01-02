@@ -91,18 +91,19 @@ resource "aws_dynamodb_table" "images" {
   }
 
   local_secondary_index {
-    name               = "filename_index"
-    range_key          = "filename"
-    projection_type    = "ALL"
+    name            = "filename_index"
+    range_key       = "filename"
+    projection_type = "ALL"
   }
 
   tags = local.common_tags
 }
 
 resource "aws_ssm_parameter" "dynamodb-stream-arn" {
-  name  = "dynamodb_stream_arn"
-  type  = "SecureString"
-  value = aws_dynamodb_table.images.stream_arn
+  name      = "dynamodb_stream_arn"
+  type      = "SecureString"
+  value     = aws_dynamodb_table.images.stream_arn
+  overwrite = true
 
   tags = local.common_tags
 }
