@@ -27,8 +27,8 @@ jobs:
         run: terraform fmt
 
       - name: Terraform Init
+        working-directory: infra
         run: |
-          cd infra
           terraform init -backend-config="bucket=aws-microservice-processor-$ENV"
           terraform workspace list
           terraform workspace select production || terraform workspace new production
@@ -42,8 +42,8 @@ jobs:
           terraform validate
 
       - name: Terraform Plan
+        working-directory: infra
         run: |
-          cd infra
           terraform workspace list
           terraform workspace select production || terraform workspace new production
           terraform plan
@@ -51,8 +51,8 @@ jobs:
           ENV: production
 
       - name: Terraform Apply
+        working-directory: infra
         run: |
-          cd infra
           terraform workspace list
           terraform workspace select production || terraform workspace new production
           terraform apply -auto-approve
@@ -60,6 +60,7 @@ jobs:
           ENV: production
 
       - shell: bash
+        working-directory: infra
         run: |
           echo "export SQS_ARN=`terraform output sqs_arn`" > tf.env
 
@@ -67,7 +68,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: tfenv
-          path: tf.env
+          path: infra/tf.env
 
   serverless:
     needs: terraform

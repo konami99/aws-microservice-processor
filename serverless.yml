@@ -23,6 +23,6 @@ functions:
       - Effect: "Allow"        
         Action:
           - sqs:ReceiveMessage
-        Resource: ${env:SQS_ARN}
+        Resource: "arn:aws:sqs:us-west-2:476985000721:s3-event-process-queue"
     events:
-      - sqs: ${env:SQS_ARN}
+      - sqs: arn:aws:sqs:us-west-2:476985000721:s3-event-process-queue
