@@ -71,3 +71,4 @@ jobs:
         env:
           ENV: production
           AWS_ASSUME_ROLE_ARN: ${{ secrets.AWS_ROLE_TO_ASSUME_PRODUCTION }}
+          SQS_ARN: ${{ env.SQS_ARN }}
