@@ -90,6 +90,11 @@ resource "aws_dynamodb_table" "images" {
     type = "S"
   }
 
+  ttl {
+    attribute_name = "time_to_exist"
+    enabled        = false
+  }
+
   local_secondary_index {
     name            = "filename_index"
     range_key       = "filename"
