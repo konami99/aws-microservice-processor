@@ -92,7 +92,7 @@ resource "aws_dynamodb_table" "images" {
 
   ttl {
     attribute_name = "time_to_exist"
-    enabled        = false
+    enabled        = true
   }
 
   local_secondary_index {
