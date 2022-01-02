@@ -62,7 +62,7 @@ jobs:
       - shell: bash
         working-directory: infra
         run: |
-          export SQS_ARN=`terraform output sqs_arn`
+          echo "SQS_ARN=`terraform output sqs_arn`" >> $GITHUB_ENV
 
       - name: Serverless Deploy
         run: |
@@ -71,4 +71,3 @@ jobs:
         env:
           ENV: production
           AWS_ASSUME_ROLE_ARN: ${{ secrets.AWS_ROLE_TO_ASSUME_PRODUCTION }}
-          SQS_ARN: arn:aws:sqs:us-west-2:476985000721:s3-event-process-queue
