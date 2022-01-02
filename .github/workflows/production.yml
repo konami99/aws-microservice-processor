@@ -79,7 +79,7 @@ jobs:
           name: tfenv
 
       - shell: bash
-        run: . tf.env
+        run: ". tf.env"
 
       - name: Serverless Deploy
         run: |
