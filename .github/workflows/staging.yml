@@ -46,7 +46,7 @@ jobs:
           cd infra
           terraform workspace list
           terraform workspace select staging || terraform workspace new staging
-          terraform plan -var "env=$ENV" -var "sqs_arn=$SQS_ARN"
+          terraform plan
 
       - name: Terraform Apply
         run: |
@@ -54,7 +54,7 @@ jobs:
           cd infra
           terraform workspace list
           terraform workspace select staging || terraform workspace new staging
-          terraform apply -auto-approve -var "env=$ENV" -var "sqs_arn=$SQS_ARN"
+          terraform apply -auto-approve
 
       - name: Serverless Deploy
         run: |

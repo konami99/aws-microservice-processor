@@ -34,6 +34,10 @@ data "aws_ssm_parameter" "sns_arn" {
   name = "sns_arn"
 }
 
+data "aws_ssm_parameter" "sqs_arn" {
+  name = "sqs_arn"
+}
+
 data "aws_iam_policy_document" "sqs-queue-policy" {
   statement {
     sid    = "sns-topic"
@@ -49,7 +53,7 @@ data "aws_iam_policy_document" "sqs-queue-policy" {
     ]
 
     resources = [
-      var.sqs_arn
+      aws_ssm_parameter.sqs_arn.value
     ]
 
     condition {
@@ -95,7 +99,7 @@ resource "aws_dynamodb_table" "images" {
   tags = local.common_tags
 }
 
-resource "aws_ssm_parameter" "sns-arn" {
+resource "aws_ssm_parameter" "dynamodb-stream-arn" {
   name  = "dynamodb_stream_arn"
   type  = "SecureString"
   value = aws_dynamodb_table.images.stream_arn
