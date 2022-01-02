@@ -23,6 +23,6 @@ functions:
       - Effect: "Allow"        
         Action:
           - sqs:ReceiveMessage
-        Resource: ${env:SQS_ARN}
+        Resource: ${ssm:/sqs_arn}
     events:
-      - sqs: ${env:SQS_ARN}
+      - sqs: ${ssm:/sqs_arn}

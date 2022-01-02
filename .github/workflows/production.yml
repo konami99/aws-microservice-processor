@@ -56,7 +56,6 @@ jobs:
           terraform workspace list
           terraform workspace select production || terraform workspace new production
           terraform apply -auto-approve
-          echo "SQS_ARN=`terraform output sqs_arn`" >> $GITHUB_ENV
         env:
           ENV: production
 
