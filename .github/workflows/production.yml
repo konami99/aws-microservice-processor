@@ -66,7 +66,7 @@ jobs:
 
       - name: Serverless Deploy
         run: |
-          cat $SQS_ARN
+          echo $SQS_ARN
           npm install
           npm run deploy
         env:
