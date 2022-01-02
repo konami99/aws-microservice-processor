@@ -1,7 +1,7 @@
 on: push
 
 jobs:
-  terraform:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Configure AWS Credentials for Production
@@ -62,25 +62,7 @@ jobs:
       - shell: bash
         working-directory: infra
         run: |
-          echo "export SQS_ARN=`terraform output sqs_arn`" > tf.env
-
-      - name: Upload tf.env
-        uses: actions/upload-artifact@v2
-        with:
-          name: tfenv
-          path: infra/tf.env
-
-  serverless:
-    needs: terraform
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download tf.env
-        uses: actions/download-artifact@v2
-        with:
-          name: tfenv
-
-      - shell: bash
-        run: cat tf.env
+          export SQS_ARN=`terraform output sqs_arn`
 
       - name: Serverless Deploy
         run: |
@@ -89,6 +71,3 @@ jobs:
         env:
           ENV: production
           AWS_ASSUME_ROLE_ARN: ${{ secrets.AWS_ROLE_TO_ASSUME_PRODUCTION }}
-
-
-
