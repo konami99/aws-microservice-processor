@@ -1,4 +1,4 @@
 output "sqs_arn" {
-  value     = data.aws_ssm_parameter.sqs_arn.value
+  value     = aws_sqs_queue.s3_event_process_queue.arn
   sensitive = true
 }
